@@ -30,7 +30,7 @@
         }
         .chart-line {
             position: absolute;
-            width: 300%;
+            width: 100%;
             height: 100%;
             background: linear-gradient(90deg, 
                 transparent 0%, 
@@ -39,8 +39,6 @@
                 rgba(29, 161, 242, 0.06) 80%, 
                 transparent 100%
             );
-            filter: blur(1.5px);
-            animation: drift 60s linear infinite;
         }
         .chart-line svg {
             width: 100%;
@@ -51,23 +49,8 @@
             fill: none;
             stroke: #1DA1F2;
             stroke-width: 2.5;
-            opacity: 0.7;
-            filter: drop-shadow(0 0 6px rgba(29, 161, 242, 0.6));
-            animation: pulse 4s ease-in-out infinite alternate;
+            opacity: 0.6;
         }
-
-        @keyframes drift {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-66.66%); }
-        }
-        @keyframes pulse {
-            0% { stroke-width: 2.5; opacity: 0.7; }
-            100% { stroke-width: 3; opacity: 0.85; }
-        }
-
-        /* Duplicate lines for seamless loop */
-        .chart-line:nth-child(2) { animation-delay: -20s; }
-        .chart-line:nth-child(3) { animation-delay: -40s; }
 
         /* ==== CONTAINER ==== */
         .container {
@@ -82,7 +65,6 @@
             width: 100%;
             position: relative;
             z-index: 2;
-            backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.05);
         }
 
@@ -282,16 +264,6 @@
                 <path d="M0,300 Q100,250 150,280 T300,260 Q400,230 450,270 T600,240 Q700,210 750,260 T900,230 Q1000,200 1050,250 T1200,220"></path>
             </svg>
         </div>
-        <div class="chart-line">
-            <svg viewBox="0 0 1200 600" preserveAspectRatio="none">
-                <path d="M0,280 Q100,230 150,260 T300,240 Q400,210 450,250 T600,220 Q700,190 750,240 T900,210 Q1000,180 1050,230 T1200,200"></path>
-            </svg>
-        </div>
-        <div class="chart-line">
-            <svg viewBox="0 0 1200 600" preserveAspectRatio="none">
-                <path d="M0,320 Q100,270 150,300 T300,280 Q400,250 450,290 T600,260 Q700,230 750,280 T900,250 Q1000,220 1050,270 T1200,240"></path>
-            </svg>
-        </div>
     </div>
 
     <div class="container">
@@ -411,7 +383,74 @@
                     <span class="highlight">Lot Size: $${lotSize.toFixed(2)}</span><br>
                     <small>Total $ value of the position.</small>
                 </div>
-                <a class="watermark-box" href="https://www.instagram.com/jaisal_x7/" target="_blank" rel="noopener noreferrer">genz_.trader by jaisal_x7 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.256 1.216.6 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.05 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.05-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.065.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.363-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.25a3.25 3.25 0 1 1 0-6.5 3.25 3.25 0 0 1 0 6.5zm5.25-9.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5z"/></svg></a>
+                <a class="watermark-box" href="https://www.instagram.com/jaisal_x7/" target="_blank" rel="noopener noreferrer">FOLLOW :- JAISAL_X7 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.256 1.216.6 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.05 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.05-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.065.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.363-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.25a3.25 3.25 0 1 1 0-6.5 3.25 3.25 0 0 1 0 6.5zm5.25-9.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5z"/></svg></a>
+            `;
+
+            setTimeout(() => {
+                const box = resultDiv.querySelector('.watermark-box');
+                if (box) box.classList.add('visible');
+            }, 150);
+        }
+    </script>
+
+</body></html>
+                badge.style.display = 'inline-block';
+                return 'short';
+            } else {
+                badge.textContent = 'Invalid: Entry = Stop-Loss';
+                badge.className = 'detected';
+                badge.style.display = 'inline-block';
+                return null;
+            }
+        }
+
+        ['entryPrice', 'stopLossPrice'].forEach(id => {
+            document.getElementById(id).addEventListener('input', () => {
+                const entry = parseFloat(document.getElementById('entryPrice').value);
+                const stop  = parseFloat(document.getElementById('stopLossPrice').value);
+                updateDetectedSide(entry, stop);
+            });
+        });
+
+        function calculatePosition() {
+            const accountBalance = parseFloat(document.getElementById('accountBalance').value);
+            const riskPercent    = parseFloat(document.getElementById('riskPercent').value) / 100;
+            const entryPrice     = parseFloat(document.getElementById('entryPrice').value);
+            const stopLossPrice  = parseFloat(document.getElementById('stopLossPrice').value);
+
+            if (isNaN(accountBalance) || isNaN(riskPercent) || isNaN(entryPrice) || isNaN(stopLossPrice)) {
+                alert('Please fill in all fields with valid numbers.');
+                return;
+            }
+
+            const tradeSide = updateDetectedSide(entryPrice, stopLossPrice);
+            if (!tradeSide) {
+                alert('Entry price and Stop-Loss price cannot be equal.');
+                return;
+            }
+
+            const maxRiskAmount = accountBalance * riskPercent;
+            const priceDiff = tradeSide === 'long'
+                ? entryPrice - stopLossPrice
+                : stopLossPrice - entryPrice;
+
+            if (priceDiff <= 0) {
+                alert('Price difference is invalid. Check Entry and Stop-Loss.');
+                return;
+            }
+
+            const positionSize   = maxRiskAmount / priceDiff;
+            const lotSize        = positionSize * entryPrice;
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <div class="risk">Maximum Risk Amount: $${maxRiskAmount.toFixed(2)}<br><small>Dollar amount you are willing to lose.</small></div>
+                <div class="position">Position Size: ${positionSize.toFixed(6)} units<br><small>Number of crypto units to ${tradeSide === 'long' ? 'buy' : 'sell'}.</small></div>
+                <div class="lot-size">
+                    <span class="highlight">Lot Size: $${lotSize.toFixed(2)}</span><br>
+                    <small>Total $ value of the position.</small>
+                </div>
+                <a class="watermark-box" href="https://www.instagram.com/jaisal_x7/" target="_blank" rel="noopener noreferrer">HA HA HAA NOW FOLLOW ON INSTAGRAM :- JAISAL_X7 FOLLOW ON INSTAGRAM <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.256 1.216.6 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.05 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.05-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.065.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.363-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.25a3.25 3.25 0 1 1 0-6.5 3.25 3.25 0 0 1 0 6.5zm5.25-9.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5z"/></svg></a>
             `;
 
             setTimeout(() => {
