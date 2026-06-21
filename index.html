@@ -1,24 +1,28 @@
 <!DOCTYPE html>
-<!-- saved from url=(0040)file:///C:/Users/jaisal/Downloads/u.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Risk Manager</title>
     <style>
         /* ==== GLOBAL ==== */
-        html,body {margin:0;padding:0;height:100%;overflow:hidden;background:#121212;position:relative;}
+        * , *::before, *::after { box-sizing: border-box; }
+        html,body {margin:0;padding:0;min-height:100%;background:#121212;position:relative;}
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             position:relative;
             color: #e0e0e0;
+            min-height: 100vh;
+            padding: 16px;
+            padding-bottom: 76px; /* room for bottom ad bar */
         }
 
         /* ==== FLOATING BTC CHART BACKGROUND ==== */
         .chart-bg {
-            position: absolute;
+            position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             overflow: hidden;
             z-index: 1;
@@ -86,6 +90,7 @@
             flex: 1 1 360px;
             display: flex;
             flex-direction: column;
+            min-width: 0;
         }
 
         .left-panel h2, .right-panel h2 {margin-top:0;color:#1DA1F2;}
@@ -105,6 +110,7 @@
             background:#2c2c2c;
             color:#e0e0e0;
             font-size:1rem;
+            width: 100%;
             transition:border-color .3s;
         }
         input:focus {border-color:#1DA1F2;outline:none;}
@@ -115,6 +121,8 @@
             padding:8px 16px;
             border-radius:6px;
             display:inline-block;
+            max-width: 100%;
+            word-break: break-word;
         }
         .detected.long {background:#2e7d32;color:#fff;}
         .detected.short {background:#b71c1c;color:#fff;}
@@ -132,6 +140,7 @@
             letter-spacing:1px;
             transition:transform .2s,box-shadow .2s;
             margin-top:10px;
+            width: 100%;
         }
         button.calculate:hover {
             transform:scale(1.05);
@@ -151,6 +160,7 @@
             color:#fff;
             font-size:0.95rem;
             transition:all .3s ease;
+            word-wrap: break-word;
         }
         .risk {background:#b71c1c;}
         .position {background:#2e7d32;}
@@ -172,42 +182,94 @@
         .watermark-box {
             margin-top: 8px;
             align-self: flex-end;
-            background: rgba(29, 161, 242, 0.15);
-            color: #1DA1F2;
-            font-size: 0.68rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: linear-gradient(90deg,#f58529,#dd2a7b,#8134af,#515bd4);
+            color: #fff;
+            font-size: 0.85rem;
             font-weight: 600;
             letter-spacing: 0.9px;
             text-transform: uppercase;
-            padding: 5px 11px;
-            border-radius: 6px;
-            border: 1px solid rgba(29, 161, 242, 0.35);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.25);
             backdrop-filter: blur(5px);
             box-shadow: 0 2px 6px rgba(0,0,0,0.25);
             opacity: 0;
             transform: translateY(-10px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.2s ease;
             pointer-events: none;
             white-space: nowrap;
+            text-decoration: none;
+            cursor: pointer;
         }
         .watermark-box.visible {
             opacity: 1;
             transform: translateY(0);
+            pointer-events: auto;
         }
+        .watermark-box.visible:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            transform: translateY(-2px) scale(1.03);
+        }
+        .watermark-box svg { flex-shrink: 0; width: 18px; height: 18px; }
 
+        /* ==== BOTTOM AD BAR (Instagram follow) ==== */
+        .ad-bar {
+            position: fixed;
+            left: 0; right: 0; bottom: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: center;
+            padding: 8px 10px;
+            background: rgba(18,18,18,0.95);
+            backdrop-filter: blur(6px);
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .ad-bar a.ad-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(90deg,#f58529,#dd2a7b,#8134af,#515bd4);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            max-width: 100%;
+            box-shadow: 0 2px 10px rgba(0,0,0,.4);
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+        .ad-bar a.ad-link:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 14px rgba(0,0,0,.5);
+        }
+        .ad-bar a.ad-link svg { flex-shrink: 0; width: 18px; height: 18px; }
+        .ad-bar a.ad-link span.ad-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
         /* ==== RESPONSIVE ==== */
         @media (max-width: 768px) {
             .container {flex-direction:column;padding:15px;}
             .left-panel, .right-panel {flex:1 1 auto;}
             .input-group {margin:10px 0;}
             button.calculate {width:100%;padding:14px;}
-            .watermark-box {font-size:0.62rem;padding:4px 9px;margin-top:6px;align-self:center;}
+            .watermark-box {font-size:0.78rem;padding:7px 13px;margin-top:6px;align-self:center;}
         }
         @media (max-width: 480px) {
             .container {gap:15px;padding:12px;}
             input, button.calculate {font-size:0.95rem;}
             .detected {font-size:0.9rem;padding:6px 12px;}
             .result div {font-size:0.9rem;}
-            .watermark-box {font-size:0.58rem;padding:3px 7px;}
+            .watermark-box {font-size:0.72rem;padding:6px 11px;}
+            .ad-bar a.ad-link {font-size:0.78rem;padding:7px 12px;}
+        }
+        @media (max-width: 360px) {
+            .ad-bar a.ad-link span.ad-text {max-width: 180px;}
         }
     </style>
 </head>
@@ -271,7 +333,7 @@
                     <span class="highlight">Lot Size: $198.53</span><br>
                     <small>Total $ value of the position.</small>
                 </div>
-                <div class="watermark-box visible">By jaisal_x7 (instagram)</div>
+                <a class="watermark-box visible" href="https://www.instagram.com/jaisal_x7/" target="_blank" rel="noopener noreferrer">BY JAISAL_X7 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.256 1.216.6 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.05 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.05-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.065.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.363-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.25a3.25 3.25 0 1 1 0-6.5 3.25 3.25 0 0 1 0 6.5zm5.25-9.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5z"/></svg></a>
             </div>
         </div>
     </div>
@@ -349,7 +411,7 @@
                     <span class="highlight">Lot Size: $${lotSize.toFixed(2)}</span><br>
                     <small>Total $ value of the position.</small>
                 </div>
-                <div class="watermark-box">genz_.trader by jaisal_x7</div>
+                <a class="watermark-box" href="https://www.instagram.com/jaisal_x7/" target="_blank" rel="noopener noreferrer">genz_.trader by jaisal_x7 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.256 1.216.6 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.05 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.05-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.065.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.363-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.25a3.25 3.25 0 1 1 0-6.5 3.25 3.25 0 0 1 0 6.5zm5.25-9.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5z"/></svg></a>
             `;
 
             setTimeout(() => {
